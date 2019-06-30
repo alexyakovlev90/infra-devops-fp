@@ -1,5 +1,8 @@
-/.idea
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
+*.ipr
 
 # packer
 /docker-monolith/infra/packer/variables.json
@@ -26,3 +29,6 @@ build_info.txt
 ## python specific
 *.pyc
 .env
+
+
+target/
