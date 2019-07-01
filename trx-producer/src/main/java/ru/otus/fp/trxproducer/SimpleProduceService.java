@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
 public class SimpleProduceService {
     private static final Logger logger = LoggerFactory.getLogger(SimpleProduceService.class);
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     @Value("${TOPIC_NAME:sample-topic}")
     private String topicName;
@@ -27,13 +31,11 @@ public class SimpleProduceService {
     }
 
     public void sendTrx() {
-        String uid = UUID.randomUUID().toString();
-        produceTransaction("trx", uid);
+        produceTransaction("trx", "trx_" + sdf.format(new Date()));
     }
 
     public void sendTrxProcess() {
-        String uid = UUID.randomUUID().toString();
-        produceTransaction("trx_process", "process_" + uid);
+        produceTransaction("trx_process", "process_" + sdf.format(new Date()));
     }
 
     private void produceTransaction(String key, String val) {

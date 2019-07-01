@@ -23,6 +23,20 @@
 полученных транзакций. Обработанные транзакции сервис так же сохраняет в БД.
 
 
+### trx-producer
+- консольное приложение
+- отправляет транзакции в Kafka по адресу `KAFKA_HOST` в топик `TOPIC_NAME`
+- `KAFKA_HOST` по умолчанию _localhost:9092_
+- `TOPIC_NAME` по умолчанию _sample-topic_
 
 
+### trx-receiver
+- стартует на 8080 порту
+- слушает Kafka по адресу `KAFKA_HOST` из топика `TOPIC_NAME`
+- пишет транзакции в Postgres `DB_HOST` в таблицу **TRX_DATA**
+- `KAFKA_HOST` по умолчанию _localhost:9092_
+- `TOPIC_NAME` по умолчанию _sample-topic_
 
+
+### trx-processor
+- стартует на 9090 порту

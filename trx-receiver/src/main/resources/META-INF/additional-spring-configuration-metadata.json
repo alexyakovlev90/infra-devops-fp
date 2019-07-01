@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "trx-processor.endpoint.url",
+      "type": "java.lang.String",
+      "description": "Description for trx-processor.endpoint.url."
+  }
+] }
