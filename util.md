@@ -13,6 +13,17 @@ docker-machine create --driver google \
     --google-open-port 9092/tcp \
     --google-open-port 2181/tcp \
     kafka
-    
 eval $(docker-machine env kafka)
+
+docker-machine create --driver google \
+    --google-machine-image https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts \
+    --google-machine-type n1-standard-1 \
+    --google-zone europe-west1-b \
+    --google-open-port 5432/tcp \
+    --google-open-port 5050/tcp \
+    postgres
+eval $(docker-machine env postgres)    
 ```
+
+Postgres proxy
+https://cloud.google.com/sql/docs/postgres/connect-admin-proxy
