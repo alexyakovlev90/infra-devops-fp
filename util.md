@@ -21,9 +21,34 @@ docker-machine create --driver google \
     --google-zone europe-west1-b \
     --google-open-port 5432/tcp \
     --google-open-port 5050/tcp \
+    --google-open-port 9090/tcp \
     postgres
-eval $(docker-machine env postgres)    
+eval $(docker-machine env postgres)  
+eval $(docker-machine env --unset)  
 ```
 
-Postgres proxy
+
+- Postgres proxy
 https://cloud.google.com/sql/docs/postgres/connect-admin-proxy
+
+- docker 
+```bash
+docker run --name pg -p 5432:5432 \
+    -v /root/pgdata:/var/lib/postgresql/data:Z \
+    -e POSTGRES_DB=mydb -e POSTGRES_USER=dbowner \
+    -e POSTGRES_PASSWORD=s_cret \
+    -d postgres:alpine
+```
+
+
+- Загрузим наш образ на docker hub
+```bash
+docker build -t trx-processor .
+
+docker tag trx-processor:latest alexyakovlev90/trx-processor:1.0
+docker push alexyakovlev90/trx-processor:1.0
+
+docker run -p 9090:9090 \
+    -d alexyakovlev90/trx-processor:1.0
+```
+
