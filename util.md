@@ -52,3 +52,21 @@ docker run -p 9090:9090 \
     -d alexyakovlev90/trx-processor:1.0
 ```
 
+- пробрасывание сетевых портов POD на локальную машину
+```bash
+kubectl get pods --selector component=trx-processor
+kubectl port-forward <pod-name> 8080:9090
+```
+- смотреть логи
+```bash
+kubectl logs <pod-id>
+```
+- проверка сервисов и деплойментов в minikube
+```bash
+minikube service ui
+minikube services list 
+
+minikube dashboard
+minikube service kubernetes-dashboard -n kube-system
+
+```

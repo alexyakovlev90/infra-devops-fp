@@ -1,0 +1,43 @@
+1) Деплоймент манифесты для
+- кафка
+- trx-producer
+- trx-receiver
+- trx-processor
+- ? postgres
+
+2) Прописат адреса до Postgres и Kafka в докерфайлах чз
+ENV DB_HOST=trx-producer-db-host
+ENV KAFKA_HOST=trx-producer-kafka-host
+...
+
+Описание в деплойменте
+env:
+ - name: DB_HOST
+   value: trx-producer-db-host
+
+3) Создать сервисы подключения к pod'ам
+
+
+
+4) обеспечить доступ к swagger trx-processor сервису снаружи.
+   Для этого нам понадобится Service для trx-processor-компоненты, с указанным:
+spec:
+    type: NodePort
+    ports:
+    - nodePort: 32092
+
+5) Создать окружение
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: dev
+
+- добавить окружение в деплоймент
+env:
+ - name: ENV
+ valueFrom:
+    fieldRef:
+        fieldPath: metadata.namespace
+
+? разворачивать Postgres в k8s

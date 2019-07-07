@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: trx-processor
+  labels:
+    app: infra-devops
+    component: trx-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: trx-processor
+  template:
+    metadata:
+      name: trx-processor
+      labels:
+        app: infra-devops
+        component: trx-processor
+    spec:
+      containers:
+        - image: alexyakovlev90/trx-processor
+          name: trx-processor
+          env:
+            - name: DB_HOST
+              value: trx-processor-db-host
+            - name: DB_NAME
+              value: mydb
+            - name: DB_USERNAME
+              value: dbowner
+            - name: DB_PASSWORD
+              value: s_cret
