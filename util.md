@@ -70,3 +70,5 @@ minikube dashboard
 minikube service kubernetes-dashboard -n kube-system
 
 ```
+
+https://severalnines.com/blog/using-kubernetes-deploy-postgresql

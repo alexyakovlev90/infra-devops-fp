@@ -8,7 +8,7 @@ spec:
   template:
     metadata:
       labels:
-        app: postgres
+        app: infra-devops
     spec:
       containers:
         - name: postgres

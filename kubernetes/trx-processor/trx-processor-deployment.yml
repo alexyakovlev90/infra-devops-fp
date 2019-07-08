@@ -24,10 +24,10 @@ spec:
           name: trx-processor
           env:
             - name: DB_HOST
-              value: trx-processor-db-host
+              value: postgres-db
             - name: DB_NAME
-              value: mydb
+              value: postgresdb
             - name: DB_USERNAME
-              value: dbowner
+              value: postgresadmin
             - name: DB_PASSWORD
-              value: s_cret
+              value: admin123
