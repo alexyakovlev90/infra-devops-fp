@@ -21,15 +21,18 @@ spec:
     spec:
       containers:
         - name: kafka-micro
-          image: spotify/kafka
+          image: alexyakovlev90/kafka-micro
           env:
             - name: ADVERTISED_HOST
-              value: docker-machine ip \`docker-machine active\`
-            - name: ADVERTISED_PORT
-              value: "9092"
-#          volumeMounts:
-#            - mountPath: /data/kafka-micro
-#              name: kafka-mnt
-#      volumes:
-#        - name: kafka-mnt
-#          emptyDir: {}
+              value: localhost
+#            - name: ADVERTISED_PORT
+#              value: "9092"
+          ports:
+            - containerPort: 9092
+            - containerPort: 2181
+          volumeMounts:
+            - mountPath: /data/kafka-micro
+              name: kafka-mnt
+      volumes:
+        - name: kafka-mnt
+          emptyDir: {}

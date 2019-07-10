@@ -1,6 +1,7 @@
 package ru.otus.fp.trxreceiver.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "TRX_DATA")
 @Data
+@Accessors(chain = true)
 public class TrxData {
 
     @Id

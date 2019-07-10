@@ -27,6 +27,23 @@ eval $(docker-machine env postgres)
 eval $(docker-machine env --unset)  
 ```
 
+### Kafka-full
+- установлен zookeeper-micro https://github.com/kow3ns/kubernetes-zookeeper/tree/master/manifests
+- kafka https://github.com/kow3ns/kubernetes-kafka/tree/master/manifests
+
+### Kafka-micro
+
+- Установка и проверка kafka
+```bash
+docker run -p 2181:2181 -p 9092:9092 \
+    --env ADVERTISED_HOST=`docker-machine ip \`docker-machine active\`` \
+    --env ADVERTISED_PORT=9092 \
+    spotify/kafka
+
+bash kafka-console-consumer --bootstrap-server 34.77.246.22:9092 --topic test
+bash kafka-console-producer --broker-list 34.77.246.22:9092 --topic test
+```
+
 
 - Postgres proxy
 https://cloud.google.com/sql/docs/postgres/connect-admin-proxy

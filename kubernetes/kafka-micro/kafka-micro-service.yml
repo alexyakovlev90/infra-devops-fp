@@ -8,9 +8,14 @@ metadata:
     component: kafka-micro
 spec:
   ports:
-    - port: 9092
+    - name: kafka
+      port: 9092
       protocol: TCP
       targetPort: 9092
+    - name: zookeeper
+      port: 2181
+      protocol: TCP
+      targetPort: 2181
   selector:
     app: infra-devops
     component: kafka-micro

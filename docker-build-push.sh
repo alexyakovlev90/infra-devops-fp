@@ -12,6 +12,6 @@ docker build -t trx-receiver trx-receiver/
 docker tag trx-receiver:latest alexyakovlev90/trx-receiver:latest
 docker push alexyakovlev90/trx-receiver:latest
 
-#docker build -t kafka-micro kafka/kafka/
+#docker build -t kafka-micro kafka-micro/
 #docker tag kafka-micro:latest alexyakovlev90/kafka-micro:latest
 #docker push alexyakovlev90/kafka-micro:latest

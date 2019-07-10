@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kubectl apply -f kafka-micro/
+#kubectl apply -f kafka-micro/
 
 kubectl apply -f postgres/postgres-configmap.yml
 # kubectl create -f postgres/postgres-storage.yml

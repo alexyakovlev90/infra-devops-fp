@@ -13,4 +13,4 @@ ENV TOPIC_NAME trx-topic
 ARG JAR_FILE=target/trx-receiver.jar
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java","-jar","-XX:+UseSerialGC","-Xss512k","-XX:MaxRAM=256m","/app.jar"]

@@ -9,12 +9,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/process")
+@Path("/api/process")
 public interface TrxProcessorApiClient {
 
     @POST
     @Path("/")
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
-    ResponseEntity<Long> getProjects(TrxData trxData);
+    ResponseEntity<Long> processTrx(TrxData trxData);
 }

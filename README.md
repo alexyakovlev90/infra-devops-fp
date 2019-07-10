@@ -29,20 +29,45 @@
 - `KAFKA_HOST` по умолчанию _localhost:9092_
 - `TOPIC_NAME` по умолчанию _sample-topic_
 
-
 ### trx-receiver
 - стартует на 8080 порту
 - слушает Kafka по адресу `KAFKA_HOST` из топика `TOPIC_NAME`
 - пишет транзакции в Postgres `DB_HOST` в таблицу **TRX_DATA**
+- отправляет транзакции в _trx-processor_
 - `KAFKA_HOST` по умолчанию _localhost:9092_
 - `TOPIC_NAME` по умолчанию _sample-topic_
 
-
 ### trx-processor
 - стартует на 9090 порту
+- получает транзакции по пути `/api/process`
+- обрабатывает транзакции, записывает в `DB_HOST` в таблицу **TRX_DATA_PROCESSED**
+- swagger доступен `trx-processor:9090/swagger-ui.html`
 
 
+## Как запустить проект
 
-### Kafka
-- установлен zookeeper-micro https://github.com/kow3ns/kubernetes-zookeeper/tree/master/manifests
-- kafka https://github.com/kow3ns/kubernetes-kafka/tree/master/manifests
+1) Ставим Kafka через docker-machine на удаленный хост
+```bash
+docker run -p 2181:2181 -p 9092:9092 \
+    --env ADVERTISED_HOST=`docker-machine ip \`docker-machine active\`` \
+    --env ADVERTISED_PORT=9092 \
+    spotify/kafka
+```
+
+2) Задаем переменную окружения KAFKA_HOST=`docker-machine ip` 
+в deploy манифестах 
+- kubernetes/trx-producer/trx-producer-deployment.yml
+- kubernetes/trx-receiver/trx-receiver-deployment.yml
+
+3) Собираем артефакты (jar-файлы) с помощью Maven `mvn package` в директориях
+- trx-receiver
+- trx-processor
+- trx-producer
+
+4) Билдим докер образы и пушим в докер хаб
+- запуск скрипта docker-build-push.sh
+
+5) Запускаем скрипт kubernetes/deploy.sh
+
+
+* Проверить работоспособность можно по логам trx-processor

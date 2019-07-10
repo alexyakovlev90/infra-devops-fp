@@ -24,6 +24,6 @@ spec:
           name: trx-producer
           env:
             - name: KAFKA_HOST
-              value: kafka-micro:9092
+              value: 34.77.246.22:9092
             - name: TOPIC_NAME
               value: trx-topic
