@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: trx-producer
+  labels:
+    app: infra-devops
+    component: trx-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: trx-producer
+  template:
+    metadata:
+      name: trx-producer
+      labels:
+        app: infra-devops
+        component: trx-producer
+    spec:
+      containers:
+        - image: alexyakovlev90/trx-producer
+          name: trx-producer
+          env:
+            - name: KAFKA_HOST
+              value: kafka-micro:9092
+            - name: TOPIC_NAME
+              value: trx-topic

@@ -1,21 +1,30 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: postgres
+  labels:
+    app: infra-devops
+    component: postgres
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: postgres
   template:
     metadata:
+      name: postgres
       labels:
         app: infra-devops
+        component: postgres
     spec:
       containers:
         - name: postgres
           image: postgres:10.4
-          imagePullPolicy: "IfNotPresent"
-          ports:
-            - containerPort: 5432
+#          imagePullPolicy: "IfNotPresent"
+#          ports:
+#            - containerPort: 5432
           envFrom:
             - configMapRef:
                 name: postgres-config
@@ -24,5 +33,6 @@ spec:
               name: postgredb
       volumes:
         - name: postgredb
-          persistentVolumeClaim:
-            claimName: postgres-pv-claim
+          emptyDir: {}
+#          persistentVolumeClaim:
+#            claimName: postgres-pv-claim

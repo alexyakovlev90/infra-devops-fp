@@ -15,7 +15,7 @@ import java.util.Properties;
 public class KafkaConfig {
     private static final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
-    @Value("${KAFKA_HOST:localhost:9092}")
+    @Value("${kafka.host}")
     public String kafkaHost;
 
     @PostConstruct

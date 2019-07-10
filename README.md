@@ -40,3 +40,9 @@
 
 ### trx-processor
 - стартует на 9090 порту
+
+
+
+### Kafka
+- установлен zookeeper-micro https://github.com/kow3ns/kubernetes-zookeeper/tree/master/manifests
+- kafka https://github.com/kow3ns/kubernetes-kafka/tree/master/manifests

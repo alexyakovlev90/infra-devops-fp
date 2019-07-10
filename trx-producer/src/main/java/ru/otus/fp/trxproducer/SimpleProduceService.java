@@ -19,7 +19,7 @@ public class SimpleProduceService {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-    @Value("${TOPIC_NAME:sample-topic}")
+    @Value("${kafka.topic}")
     private String topicName;
 
     @Resource

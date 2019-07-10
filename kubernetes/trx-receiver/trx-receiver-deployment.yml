@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: trx-receiver
+  labels:
+    app: infra-devops
+    component: trx-receiver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: trx-receiver
+  template:
+    metadata:
+      name: trx-receiver
+      labels:
+        app: infra-devops
+        component: trx-receiver
+    spec:
+      containers:
+        - image: alexyakovlev90/trx-receiver
+          name: trx-receiver
+          env:
+            - name: DB_HOST
+              value: postgres-db
+            - name: DB_NAME
+              value: postgresdb
+            - name: DB_USERNAME
+              value: postgresadmin
+            - name: DB_PASSWORD
+              value: admin123
+            - name: KAFKA_HOST
+              value: kafka-micro:9092
+            - name: TOPIC_NAME
+              value: trx-topic
+            - name: TRX_PROCESSOR
+              value: trx-processor:9090

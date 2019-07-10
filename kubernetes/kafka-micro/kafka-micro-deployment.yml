@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: kafka-micro
+  labels:
+    app: infra-devops
+    component: kafka-micro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: kafka-micro
+  template:
+    metadata:
+      name: kafka-micro
+      labels:
+        app: infra-devops
+        component: kafka-micro
+    spec:
+      containers:
+        - name: kafka-micro
+          image: spotify/kafka
+          env:
+            - name: ADVERTISED_HOST
+              value: docker-machine ip \`docker-machine active\`
+            - name: ADVERTISED_PORT
+              value: "9092"
+#          volumeMounts:
+#            - mountPath: /data/kafka-micro
+#              name: kafka-mnt
+#      volumes:
+#        - name: kafka-mnt
+#          emptyDir: {}

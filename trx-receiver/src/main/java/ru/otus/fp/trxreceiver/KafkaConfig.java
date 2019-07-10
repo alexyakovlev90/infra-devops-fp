@@ -15,16 +15,18 @@ import java.util.Properties;
 public class KafkaConfig {
     private static final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
-    private static final String clientId = "sample-client";
 
-    @Value("${KAFKA_HOST:localhost:9092}")
+    @Value("${kafka.host}")
     public String kafkaHost;
 
-    @Value("${TOPIC_NAME:sample-topic}")
+    @Value("${kafka.topic}")
     private String topicName;
 
-    @Value("${GROUP_ID:sample-group}")
+    @Value("${kafka.group-id}")
     private String groupId;
+
+    @Value("${kafka.client-id}")
+    private String clientId;
 
     @PostConstruct
     public void init() {
