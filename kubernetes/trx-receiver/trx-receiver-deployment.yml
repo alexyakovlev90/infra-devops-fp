@@ -32,7 +32,7 @@ spec:
             - name: DB_PASSWORD
               value: admin123
             - name: KAFKA_HOST
-              value: 34.77.246.22:9092
+              value: kafka-service:9092
             - name: TOPIC_NAME
               value: trx-topic
             - name: TRX_PROCESSOR
