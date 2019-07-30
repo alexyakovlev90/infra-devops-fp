@@ -29,6 +29,7 @@ public class KafkaConfig {
         Properties props = new Properties();
         //Assign localhost id
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHost);
+//        props.put("advertised.host.name", kafkaHost);
         //Set acknowledgements for producer requests.
         props.put("acks", "all");
         //If the request fails, the producer can automatically retry,
@@ -39,9 +40,8 @@ public class KafkaConfig {
         props.put("linger.ms", 1);
         //The buffer.memory controls the total amount of memory available to the producer for buffering.
         props.put("buffer.memory", 33554432);
+        props.put("client.dns.lookup", "use_all_dns_ips");
         // Error while fetching metadata with correlation id 548
-        props.put("listeners", "PLAINTEXT://host.name:port");
-        props.put("advertised.listeners", "PLAINTEXT://host.name:port");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         return new KafkaProducer<>(props);

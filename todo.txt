@@ -1,3 +1,10 @@
+Валится ошибка
+Error while fetching metadata with correlation id
+
+лечение
+
+https://stackoverflow.com/questions/47677549/kafka-zookeeper-connection-to-node-1-could-not-be-established-broker-may-no
+
 1) Деплоймент манифесты для
 - кафка
 - trx-producer

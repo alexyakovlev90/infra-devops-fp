@@ -89,3 +89,27 @@ minikube service kubernetes-dashboard -n kube-system
 ```
 
 https://severalnines.com/blog/using-kubernetes-deploy-postgresql
+
+
+## Установка Кафки в gcloud
+
+- Завести Kafka Google Click to Deploy
+
+- Прописать конфиг в /opt/kafka/config/server.config
+
+If Internal IP is 10.168.4.9 and port is 9092 and External IP is 35.196.212.10 and port is 3101 then your propert will look like ,
+listeners=PLAINTEXT://10.168.4.9:9092 &
+advertised.listeners = PLAINTEXT://35.196.212.10:3101
+
+- перезапуск кафка
+```bash
+sudo systemctl restart kafka
+```
+
+- проверка работы
+```bash
+kafka-console-consumer.sh --bootstrap-server 10.156.0.2:9092 --topic sample-topic --from-beginning
+kafka-console-producer.sh --broker-list 35.246.230.182:9092 --topic test
+```
+
+TODO переписать на ансибл роль / терраформ
