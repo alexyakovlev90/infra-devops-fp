@@ -1,5 +1,6 @@
 package ru.otus.fp.trxreceiver;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -34,20 +35,26 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-
         new Thread(() -> {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5L));
                 for (ConsumerRecord<String, String> record : records) {
-                    logger.info("Receive. offset = {}, key = {}, value = {},  time = {}",
-                            record.offset(), record.key(), record.value(), sdf.format(new Date()));
+                    try {
+                        logger.info("Receive. offset = {}, key = {}, value = {},  time = {}",
+                                record.offset(), record.key(), record.value(), sdf.format(new Date()));
 
-                    TrxData trxData = new TrxData().setTrxInfo(record.value())
-                            .setDateReceived(new Date());
-                    trxData = trxDataRepository.save(trxData);
-                    ResponseEntity<Long> resp = trxProcessorApiClient.processTrx(trxData);
+                        TrxData trxData = new TrxData().setTrxInfo(record.value())
+                                .setDateReceived(new Date());
+                        trxData = trxDataRepository.save(trxData);
 
-                    logger.info("Processed: {}", resp);
+                        if (trxData.getTrxInfo().contains("process")) {
+                            Long resp = trxProcessorApiClient.processTrx(trxData);
+                            logger.info("Processed: {}", resp);
+                        }
+
+                    } catch (Exception e) {
+                        logger.error("Processing error", e);
+                    }
                 }
 
                 try {

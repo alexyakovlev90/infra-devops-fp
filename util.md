@@ -95,7 +95,7 @@ https://severalnines.com/blog/using-kubernetes-deploy-postgresql
 
 - Завести Kafka Google Click to Deploy
 
-- Прописать конфиг в /opt/kafka/config/server.config
+- Прописать конфиг в /opt/kafka/config/server.properties
 
 If Internal IP is 10.168.4.9 and port is 9092 and External IP is 35.196.212.10 and port is 3101 then your propert will look like ,
 listeners=PLAINTEXT://10.168.4.9:9092 &
@@ -109,7 +109,11 @@ sudo systemctl restart kafka
 - проверка работы
 ```bash
 kafka-console-consumer.sh --bootstrap-server 10.156.0.2:9092 --topic sample-topic --from-beginning
-kafka-console-producer.sh --broker-list 35.246.230.182:9092 --topic test
+kafka-console-producer.sh --broker-list 35.246.191.39:9092 --topic sample-topic
+./kafka-console-producer --broker-list 35.246.191.39:9092 --topic sample-topic
 ```
 
 TODO переписать на ансибл роль / терраформ
+
+
+## Установка Postgres

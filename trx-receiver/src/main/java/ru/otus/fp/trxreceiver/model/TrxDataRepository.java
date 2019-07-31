@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TrxDataRepository extends CrudRepository<TrxData, Long> {
+    Long countById(Long id);
 }

@@ -16,5 +16,5 @@ public interface TrxProcessorApiClient {
     @Path("/")
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
-    ResponseEntity<Long> processTrx(TrxData trxData);
+    Long processTrx(TrxData trxData);
 }
