@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: trx-processor
+  labels:
+    app: infra-devops
+    component: trx-processor
+  # Отключаем проброс HTTP
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  # Подключаем наш сертификат
+  tls:
+    - secretName: trx-processor-ingress
+  backend:
+    serviceName: trx-processor
+    servicePort: 9090

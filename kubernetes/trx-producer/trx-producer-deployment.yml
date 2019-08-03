@@ -24,6 +24,14 @@ spec:
           name: trx-producer
           env:
             - name: KAFKA_HOST
-              value: kafka-service:9092
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: KAFKA_HOST
+#              value: kafka-service:9092
             - name: TOPIC_NAME
-              value: trx-topic
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: TOPIC_NAME
+#              value: trx-topic

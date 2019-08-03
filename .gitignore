@@ -36,3 +36,4 @@ target/
 
 native-start-app.sh
 env_var.txt
+env-config.yml

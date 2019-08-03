@@ -24,10 +24,22 @@ spec:
           name: trx-processor
           env:
             - name: DB_HOST
-              value: postgres-db
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_HOST
             - name: DB_NAME
-              value: postgresdb
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_NAME
             - name: DB_USERNAME
-              value: postgresadmin
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_USERNAME
             - name: DB_PASSWORD
-              value: admin123
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_PASSWORD

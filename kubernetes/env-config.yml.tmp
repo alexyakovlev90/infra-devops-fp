@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+data:
+  KAFKA_HOST:
+  TOPIC_NAME:
+  DB_HOST:
+  DB_NAME:
+  DB_USERNAME:
+  DB_PASSWORD:

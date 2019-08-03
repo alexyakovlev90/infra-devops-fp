@@ -24,16 +24,40 @@ spec:
           name: trx-receiver
           env:
             - name: DB_HOST
-              value: postgres-db
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_HOST
+#              value: postgres-db
             - name: DB_NAME
-              value: postgresdb
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_NAME
+#              value: postgresdb
             - name: DB_USERNAME
-              value: postgresadmin
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_USERNAME
+#              value: postgresadmin
             - name: DB_PASSWORD
-              value: admin123
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: DB_PASSWORD
+#              value: admin123
             - name: KAFKA_HOST
-              value: kafka-service:9092
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: KAFKA_HOST
+#              value: kafka-service:9092
             - name: TOPIC_NAME
-              value: trx-topic
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: TOPIC_NAME
+#              value: trx-topic
             - name: TRX_PROCESSOR
               value: trx-processor:9090

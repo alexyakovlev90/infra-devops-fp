@@ -1,0 +1,20 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: trx-receiver
+  labels:
+    app: infra-devops
+    component: trx-receiver
+  # Отключаем проброс HTTP
+#  annotations:
+#    kubernetes.io/ingress.allow-http: "false"
+spec:
+  rules:
+    - host: trx-receiver.info
+      http:
+        paths:
+        - path: /*
+          backend:
+            serviceName: trx-receiver
+            servicePort: 8080

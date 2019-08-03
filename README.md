@@ -36,6 +36,7 @@
 - отправляет транзакции в _trx-processor_
 - `KAFKA_HOST` по умолчанию _localhost:9092_
 - `TOPIC_NAME` по умолчанию _sample-topic_
+- swagger доступен `trx-receiver:8080/swagger-ui.html`
 
 ### trx-processor
 - стартует на 9090 порту
@@ -45,29 +46,26 @@
 
 
 ## Как запустить проект
+### old
+1) Предполагается, что для проекта подняты Kafka и Postgres.
+Сейчас Kafka и Postgres установлены с помощью Google Click to Deploy
 
-1) Ставим Kafka через docker-machine на удаленный хост
+3) Собираем артефакты (jar-файлы), билдим докер образы и пушим в докер хаб
 ```bash
-docker run -p 2181:2181 -p 9092:9092 \
-    --env ADVERTISED_HOST=`docker-machine ip \`docker-machine active\`` \
-    --env ADVERTISED_PORT=9092 \
-    spotify/kafka
+bash docker-build-push.sh
 ```
 
-2) Задаем переменную окружения KAFKA_HOST=`docker-machine ip` 
-в deploy манифестах 
-- kubernetes/trx-producer/trx-producer-deployment.yml
-- kubernetes/trx-receiver/trx-receiver-deployment.yml
+4) Запуск приложения
+```bash
+# локально
+bash docker-run.sh
+# minikube
+minikube start
+bash kubernetes/deploy.sh
+```
 
-3) Собираем артефакты (jar-файлы) с помощью Maven `mvn package` в директориях
-- trx-receiver
-- trx-processor
-- trx-producer
-
-4) Билдим докер образы и пушим в докер хаб
-- запуск скрипта docker-build-push.sh
-
-5) Запускаем скрипт kubernetes/deploy.sh
-
-
-* Проверить работоспособность можно по логам trx-processor
+* Проверить работоспособность можно 
+```
+trx-processor:9090/swagger-ui.html
+trx-receiver:8080/swagger-ui.html
+```
