@@ -1,0 +1,23 @@
+#!/bin/bash
+
+export KAFKA_HOST=
+export TOPIC_NAME=
+
+export DB_HOST=
+export DB_NAME=
+export DB_USERNAME=
+export DB_PASSWORD=
+
+export TRX_PROCESSOR=
+
+cd trx-producer/target
+java -jar trx-producer.jar &
+cd ../..
+
+cd trx-processor/target
+java -jar -Dserver.port=9090 trx-processor.jar &
+cd ../..
+
+cd trx-receiver/target
+java -jar -Dserver.port=8080 trx-receiver.jar &
+cd ../..
