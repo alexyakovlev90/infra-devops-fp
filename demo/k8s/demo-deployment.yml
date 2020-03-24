@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    app: infra-devops
+    component: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: infra-devops
+      component: demo
+  template:
+    metadata:
+      name: demo
+      labels:
+        app: infra-devops
+        component: demo
+    spec:
+      containers:
+        - image: alexyakovlev90/demo
+          name: demo

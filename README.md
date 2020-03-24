@@ -69,3 +69,21 @@ bash kubernetes/deploy.sh
 trx-processor:9090/swagger-ui.html
 trx-receiver:8080/swagger-ui.html
 ```
+
+## Demo
+```shell script
+cd ~/.kube/
+
+kubectl config get-contexts
+kubectl config use-context CONTEXT_NAME
+kubectl apply -f k8s/
+kubectl get pods
+
+kubectl port-forward . 8081:8080
+
+kubectl describe pod 
+kubectl logs 
+
+minikube dashboard {--v=7}
+minikube service kubernetes-dashboard -n kube-system
+```
